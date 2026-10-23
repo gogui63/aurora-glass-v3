@@ -56,6 +56,27 @@ entities:
   power: sensor.potenza_casa              # consumo istantaneo mostrato nella Home (W)
   climate: climate.salotto                # climatizzatore
 
+  # --- CHIP DELLA HOME (facoltativo). Se scrivi "chips", sostituisce i chip predefiniti
+  #     (meteo, consumo, movimento) e li mostra nell'ordine indicato.
+  #     Ogni voce è un chip predefinito (weather | power | motion) oppure una entità qualsiasi.
+  #     Senza "chips" la Home resta come prima.
+  chips:
+    - weather                             # chip predefinito: temperatura esterna
+    - power                               # chip predefinito: consumo (tocco = vista Energia)
+    - entity: sensor.costo_oggi           # entità qualsiasi (obbligatorio)
+      name: Costo                         # etichetta ("" = nessuna; se manca: friendly_name)
+      icon: mdi:currency-eur              # se manca: icona dell'entità
+      decimals: 2                         # cifre decimali fisse (solo valori numerici)
+      unit: "€"                           # unità (se manca: unit_of_measurement)
+    - entity: sensor.qualita_pollini
+      attribute: livello                  # mostra un attributo invece dello stato
+      color_attribute: colore             # colore del valore preso da un attributo
+    - entity: sensor.tariffa_tempo
+      colors: { Bleu: "#89b4fa", Blanc: "#e2e8f0", Rouge: "#f38ba8" }   # colore per valore
+      tap_action: { action: navigate, navigation_path: /lovelace/energia }  # more-info (default) | navigate | url | none
+    - entity: sensor.facoltativo
+      hide_if_missing: true               # nasconde il chip se l'entità non esiste
+
   # --- TELECAMERE (vista Sicurezza). Tutte facoltative
   cameras:
     - { n: Ingresso, img: camera.ingresso_snapshot, live: camera.ingresso_live, poll: 20 }      # anteprima + diretta

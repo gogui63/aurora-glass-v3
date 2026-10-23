@@ -37,6 +37,9 @@ La versione commentata è in [`aurora-glass-v3/LEGGIMI.txt`](aurora-glass-v3/LEG
 
 La scheda si chiama `custom:aurora-v3-card`.
 
+## Chip della Home (facoltativo)
+Di serie la Home mostra tre chip: temperatura esterna, consumo e movimento. Con `entities.chips` scegli quali chip mostrare e in che ordine: ogni voce è un chip predefinito (`weather`, `power`, `motion`) oppure una entità qualsiasi, con `name`, `icon`, `attribute`, `decimals`, `unit`, `color`, `color_attribute`, `colors`, `tap_action` (`more-info` di default, `navigate`, `url`, `none`) e `hide_if_missing`. Senza `chips` la Home resta come prima. Esempi commentati in [`scheda-esempio.yaml`](aurora-glass-v3/scheda-esempio.yaml).
+
 ## Se qualcosa non va
 - *Scheda rossa "Custom element doesn't exist"* — controlla la risorsa e ricarica con Ctrl+F5.
 - *Immagini vuote* — `assets` deve essere `/local/aurora-v3/btn/` (con la barra finale).

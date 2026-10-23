@@ -37,6 +37,27 @@ The commented, step-by-step version is in [`aurora-glass-v3/LEGGIMI.txt`](aurora
 
 The card is named `custom:aurora-v3-card`. Comments in the YAML files and the guide are in Italian; the options are plain YAML keys.
 
+## Home chips (optional)
+By default the Home banner shows three chips: outdoor temperature, power and motion. Add `entities.chips` to choose which chips appear and in which order. Each item is either a built-in chip (`weather`, `power`, `motion`) or any entity:
+
+```yaml
+entities:
+  chips:
+    - weather
+    - entity: sensor.cost_today
+      name: Cost
+      icon: mdi:currency-eur
+      decimals: 2
+    - entity: sensor.pollen
+      attribute: level            # show an attribute instead of the state
+      color_attribute: color      # value colour taken from an attribute
+    - entity: sensor.tempo
+      colors: { Blue: "#89b4fa", Red: "#f38ba8" }
+      tap_action: { action: navigate, navigation_path: /lovelace/energy }
+```
+
+Options per entity chip: `entity` (required), `name`, `icon`, `attribute`, `decimals`, `unit`, `color`, `color_attribute`, `colors`, `tap_action` (`more-info` by default, `navigate`, `url`, `none`), `hide_if_missing`. Without `chips` the banner is unchanged. All options are commented in [`scheda-esempio.yaml`](aurora-glass-v3/scheda-esempio.yaml).
+
 ## Troubleshooting
 - *Red card "Custom element doesn't exist"* — check the resource URL and hard-refresh (Ctrl+F5).
 - *Empty images* — `assets` must be `/local/aurora-v3/btn/` (with the trailing slash).
